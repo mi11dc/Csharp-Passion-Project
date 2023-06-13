@@ -25,6 +25,12 @@ namespace Csharp_Passion_Project.Models
         {
         }
 
+        public DbSet<Player> Players { get; set; }
+
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<TeamPlayer> TeamPlayers { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
