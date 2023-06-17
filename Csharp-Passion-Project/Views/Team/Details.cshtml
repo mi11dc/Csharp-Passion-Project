@@ -1,0 +1,44 @@
+﻿@model Csharp_Passion_Project.Models.TeamDto
+@{
+    ViewBag.Title = "Team Details";
+}
+
+<h2>@ViewData["title"]</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Team Id
+        </dt>
+        <dd>
+            @Model.Id
+        </dd>
+
+        <dt>
+            Team Name
+        </dt>
+        <dd>
+            @Model.Name
+        </dd>
+
+        <dt>
+            Owner Name
+        </dt>
+        <dd>
+            @Model.Owner
+        </dd>
+
+        <dt>
+            Formed On
+        </dt>
+        <dd>
+            @Model.FormedOn.ToShortDateString()
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", new { id = @Model.Id }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Delete", "ConfirmDelete", new { id = @Model.Id }, new { @class = "btn btn-danger" })
+</p>

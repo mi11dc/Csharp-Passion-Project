@@ -1,0 +1,38 @@
+﻿@model Csharp_Passion_Project.Models.PlayerDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewData["title"]</h2>
+
+<div id="containershow">
+    <nav class="my-2">
+        <a class="btn btn-secondary navlink" href="/Player">Back To Players</a>
+    </nav>
+    <form method="POST" action="/Player/Edit/@Model.Id">
+        <div class="inputrow my-2">
+            <label for="FName">First Name:</label>
+            <input type="text" id="FName" name="FName" value="@Model.FName" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="LName">Last Name:</label>
+            <input type="text" id="LName" name="LName" value="@Model.LName" />
+        </div>
+
+        <div class="inputrow my-2">
+            <label for="DOB">Date of Birth:</label>
+            <input type="datetime-local" id="DOB" name="DOB" value="@Model.DOB.ToString("dd-MMM-yyyy hh:mm tt")" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="Country">Country:</label>
+            <input type="text" id="Country" name="Country" value="@Model.Country" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="BasePrice">Base Price:</label>
+            <input type="number" min="0" step="0.1" id="BasePrice" name="BasePrice" value="@Model.BasePrice" />
+        </div>
+        <div class="inputrow my-2">
+            <input class="btn btn-primary" type="submit" value="Update Player" />
+        </div>
+    </form>
+</div>

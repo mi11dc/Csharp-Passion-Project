@@ -1,0 +1,17 @@
+﻿@model Csharp_Passion_Project.Models.TeamDto
+@{
+    ViewBag.Title = "Confirm Delete";
+}
+
+<h2>@ViewData["title"]</h2>
+
+<div id="containershow">
+    <nav class="my-2">
+        <a class=" btn btn-secondary navlink" href="/Team/Details/@Model.Id">Cancel</a>
+    </nav>
+    <h2>Are you sure you want to delete <strong>@Model.Name</strong>?</h2>
+    <p>This action cannot be undone.</p>
+    <form method="POST" action="/Team/Delete/@Model.Id">
+        <input class="btn btn-danger" type="submit" value="Delete Team" />
+    </form>
+</div>

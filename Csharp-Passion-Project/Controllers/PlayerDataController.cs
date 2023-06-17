@@ -18,9 +18,22 @@ namespace Csharp_Passion_Project.Controllers
 
         // GET: api/PlayerData/ListPlayers
         [HttpGet]
-        public IEnumerable<Player> ListPlayers()
+        public IEnumerable<PlayerDto> ListPlayers()
         {
-            return db.Players;
+            List<Player> players = db.Players.ToList();
+            List<PlayerDto> playerDtos = new List<PlayerDto>();
+
+            players.ForEach(p => playerDtos.Add(new PlayerDto()
+            {
+                Id = p.Id,
+                FName = p.FName, 
+                LName = p.LName,
+                BasePrice = p.BasePrice,
+                Country = p.Country,
+                DOB = (DateTime)p.DOB
+            }));
+
+            return playerDtos;
         }
 
         // GET: api/PlayerData/FindPlayer(/5
@@ -34,7 +47,17 @@ namespace Csharp_Passion_Project.Controllers
                 return NotFound();
             }
 
-            return Ok(player);
+            PlayerDto playerDto = new PlayerDto()
+            {
+                Id = player.Id,
+                FName = player.FName, 
+                LName = player.LName,
+                BasePrice = player.BasePrice,
+                Country = player.Country,
+                DOB = (DateTime)player.DOB
+            };
+
+            return Ok(playerDto);
         }
 
         // PUT: api/PlayerData/UpdatePlayer/5

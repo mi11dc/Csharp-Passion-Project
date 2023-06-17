@@ -18,9 +18,20 @@ namespace Csharp_Passion_Project.Controllers
 
         // GET: api/TeamData/ListTeams
         [HttpGet]
-        public IEnumerable<Team> ListTeam()
+        public IEnumerable<TeamDto> ListTeams()
         {
-            return db.Teams;
+            List<Team> teams = db.Teams.ToList();
+            List<TeamDto> teamDtos = new List<TeamDto>();
+
+            teams.ForEach(t => teamDtos.Add(new TeamDto()
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Owner = t.Owner,
+                FormedOn = (DateTime)t.FormedOn
+            }));
+
+            return teamDtos;
         }
 
         // GET: api/TeamData/FindTeam/5
@@ -34,7 +45,15 @@ namespace Csharp_Passion_Project.Controllers
                 return NotFound();
             }
 
-            return Ok(team);
+            TeamDto teamDto = new TeamDto()
+            {
+                Id = team.Id,
+                Name = team.Name,
+                Owner = team.Owner,
+                FormedOn = (DateTime)team.FormedOn
+            };
+
+            return Ok(teamDto);
         }
 
         // PUT: api/TeamData/UpdateTeam/5
@@ -86,7 +105,7 @@ namespace Csharp_Passion_Project.Controllers
             db.Teams.Add(team);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = team.Id }, team);
+            return Ok(team);  //  CreatedAtRoute("DefaultApi", new { id = team.Id }, team);
         }
 
         // DELETE: api/TeamData/DeleteTeam/5

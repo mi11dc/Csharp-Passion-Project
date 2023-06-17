@@ -47,7 +47,17 @@ namespace Csharp_Passion_Project.Controllers
                 return NotFound();
             }
 
-            return Ok(teamPlayer);
+            TeamPlayerDto teamPlayerDto = new TeamPlayerDto()
+            {
+                Id = teamPlayer.Id,
+                PlayerName = String.Concat(teamPlayer.Players.FName, ' ', teamPlayer.Players.LName),
+                TeamName = teamPlayer.Teams.Name,
+                JoinedDate = teamPlayer.JoinedDate,
+                JoinedPrice = teamPlayer.JoinedPrice,
+                ReleaseDate = teamPlayer.ReleaseDate
+            };
+
+            return Ok(teamPlayerDto);
         }
 
         // PUT: api/TeamPlayerData/UpdateTeamPlayer/5

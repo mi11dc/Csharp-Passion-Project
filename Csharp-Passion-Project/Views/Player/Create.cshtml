@@ -1,0 +1,38 @@
+﻿@model Csharp_Passion_Project.Models.PlayerDto
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>@ViewData["title"]</h2>
+
+<div id="containershow">
+    <nav class="my-2">
+        <a class="btn btn-secondary navlink" href="/Player">Back To Players</a>
+    </nav>
+    <form method="POST" action="/Player/Create">
+        <div class="inputrow my-2">
+            <label for="FName">First Name:</label>
+            <input type="text" id="FName" name="FName" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="LName">Last Name:</label>
+            <input type="text" id="LName" name="LName" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="DOB">Date of Birth:</label>
+            <input type="datetime-local" id="DOB" name="DOB" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="Country">Country:</label>
+            <input type="text" id="Country" name="Country" />
+        </div>
+        <div class="inputrow my-2">
+            <label for="BasePrice">Base Price:</label>
+            <input type="number" min="0" step="0.1" id="BasePrice" name="BasePrice" />
+        </div>
+        <div class="inputrow my-2">
+            <input class="btn btn-primary" type="submit" value="Create Player" />
+        </div>
+    </form>
+</div>
+
