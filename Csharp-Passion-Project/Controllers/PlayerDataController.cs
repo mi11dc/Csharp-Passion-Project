@@ -30,7 +30,8 @@ namespace Csharp_Passion_Project.Controllers
                 LName = p.LName,
                 BasePrice = p.BasePrice,
                 Country = p.Country,
-                DOB = (DateTime)p.DOB
+                DOB = (DateTime)p.DOB,
+                SDOB = p.DOB.ToString()
             }));
 
             return playerDtos;
@@ -54,7 +55,8 @@ namespace Csharp_Passion_Project.Controllers
                 LName = player.LName,
                 BasePrice = player.BasePrice,
                 Country = player.Country,
-                DOB = (DateTime)player.DOB
+                DOB = (DateTime)player.DOB,
+                SDOB = player.DOB.ToString()
             };
 
             return Ok(playerDto);

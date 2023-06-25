@@ -13,9 +13,10 @@ namespace Csharp_Passion_Project.Controllers
     {
         string APIURL = "PlayerData/";
         private APICall api = new APICall();
+        private General general = new General();
 
         // GET: Player
-        public ActionResult Index()
+        public ActionResult Index(string Search)
         {
             string url = APIURL + "ListPlayers";
             HttpResponseMessage response = api.Get(url);
@@ -24,7 +25,17 @@ namespace Csharp_Passion_Project.Controllers
             if (response.StatusCode == HttpStatusCode.OK)
                 players = response.Content.ReadAsAsync<IEnumerable<PlayerDto>>().Result.ToList();
 
+            if (!String.IsNullOrEmpty(Search))
+                players = players.Where(x =>
+                    general.getLowerStringForSearch(x.FName).Contains(general.getLowerStringForSearch(Search)) ||
+                    general.getLowerStringForSearch(x.LName).Contains(general.getLowerStringForSearch(Search)) ||
+                    general.getLowerStringForSearch(x.Country).Contains(general.getLowerStringForSearch(Search)) ||
+                    general.getLowerStringForSearch(x.BasePrice.ToString()).Contains(general.getLowerStringForSearch(Search)) ||
+                    general.getLowerStringForSearch(x.DOB.ToShortDateString()).Contains(general.getLowerStringForSearch(Search))
+                ).ToList();
+
             ViewData["title"] = "Player List";
+            ViewData["search"] = Search;
             return View(players);
         }
 
@@ -51,18 +62,28 @@ namespace Csharp_Passion_Project.Controllers
 
         // POST: Player/Create
         [HttpPost]
-        public ActionResult Create(Player player)
+        public ActionResult Create(PlayerDto playerDto)
         {
             try
             {
                 // TODO: Add insert logic here
+                Player player = new Player()
+                {
+                    Id = playerDto.Id,
+                    FName = playerDto.FName,
+                    LName = playerDto.LName,
+                    BasePrice = playerDto.BasePrice,
+                    Country = playerDto.Country,
+                    DOB = playerDto.DOB
+                };
+                
                 string url = APIURL + "AddPlayer";
 
                 HttpResponseMessage response = api.Post(url, player);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return RedirectToAction(String.Concat("/"));
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -85,7 +106,7 @@ namespace Csharp_Passion_Project.Controllers
             if (response.StatusCode == HttpStatusCode.OK)
                 selectedPlayer = response.Content.ReadAsAsync<PlayerDto>().Result;
 
-            //selectedPlayer.DOB = selectedPlayer.DOB;
+            selectedPlayer.DOB = Convert.ToDateTime(selectedPlayer.SDOB);
 
             ViewData["title"] = "Edit PLayer";
 
@@ -94,11 +115,21 @@ namespace Csharp_Passion_Project.Controllers
 
         // POST: Player/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Player player)
+        public ActionResult Edit(int id, PlayerDto playerDto)
         {
             try
             {
                 // TODO: Add update logic here
+                Player player = new Player()
+                { 
+                    Id = id,
+                    FName = playerDto.FName,
+                    LName = playerDto.LName,
+                    BasePrice = playerDto.BasePrice,
+                    Country = playerDto.Country,
+                    DOB = playerDto.DOB
+                };
+
                 string url = APIURL + "UpdatePlayer/" + id;
 
                 HttpResponseMessage response = api.Post(url, player);
@@ -135,7 +166,7 @@ namespace Csharp_Passion_Project.Controllers
 
         // POST: Player/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {

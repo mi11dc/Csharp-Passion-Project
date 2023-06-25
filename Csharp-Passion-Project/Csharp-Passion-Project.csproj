@@ -210,11 +210,15 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\APICall.cs" />
+    <Compile Include="Models\General.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamPlayer.cs" />
+    <Compile Include="Models\ViewModels\PlayerDto.cs" />
+    <Compile Include="Models\ViewModels\TeamDto.cs" />
+    <Compile Include="Models\ViewModels\TeamPlayerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

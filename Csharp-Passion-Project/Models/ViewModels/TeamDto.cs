@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace Csharp_Passion_Project.Models
 {
-    public class Team
+    public class TeamDto
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
         public string Owner { get; set; }
 
-        public DateTime? FormedOn { get; set; }
+        public DateTime FormedOn { get; set; }
+
+        public string SFormedOn { get; set; }
+
+        //public List<PlayerDto> Players { get; set; }
     }
 }

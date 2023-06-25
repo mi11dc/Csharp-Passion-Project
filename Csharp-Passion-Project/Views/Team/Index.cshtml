@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Csharp_Passion_Project.Models.TeamDto>
 @{
-    ViewBag.Title = "Team List";
+    ViewBag.Title = "Franchise List";
 }
 
 <h2>@ViewData["title"]</h2>
@@ -11,9 +11,9 @@
 
 <div class="row">
     <div class="col-12">
-        <form asp-controller="Student" asp-action="Index">
+        <form asp-controller="Team" asp-action="Index">
             <p>
-                Search: <input type="text" name="Search" value="@ViewData["Search"]" />
+                Search: <input type="text" name="Search" value="@ViewData["search"]" />
                 <input type="submit" value="Search" />
             </p>
         </form>

@@ -31,19 +31,4 @@ namespace Csharp_Passion_Project.Models
 
         public virtual Player Players { get; set; }
     }
-
-    public class TeamPlayerDto
-    {
-        public int Id { get; set; }
-
-        public string PlayerName { get; set; }
-
-        public string TeamName { get; set; }
-
-        public DateTime JoinedDate { get; set; }
-
-        public DateTime? ReleaseDate { get; set; }
-
-        public decimal JoinedPrice { get; set; }
-    }
 }

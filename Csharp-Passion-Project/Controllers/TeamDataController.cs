@@ -27,8 +27,9 @@ namespace Csharp_Passion_Project.Controllers
             {
                 Id = t.Id,
                 Name = t.Name,
-                Owner = t.Owner,
-                FormedOn = (DateTime)t.FormedOn
+                Owner = t.Owner, 
+                FormedOn = (DateTime)t.FormedOn,
+                SFormedOn = t.FormedOn.ToString()
             }));
 
             return teamDtos;
@@ -50,7 +51,8 @@ namespace Csharp_Passion_Project.Controllers
                 Id = team.Id,
                 Name = team.Name,
                 Owner = team.Owner,
-                FormedOn = (DateTime)team.FormedOn
+                FormedOn = (DateTime)team.FormedOn,
+                SFormedOn = team.FormedOn.ToString()
             };
 
             return Ok(teamDto);

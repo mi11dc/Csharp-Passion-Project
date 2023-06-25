@@ -14,9 +14,10 @@ namespace Csharp_Passion_Project.Controllers
     {
         string APIURL = "TeamData/";
         private APICall api = new APICall();
+        private General general = new General();
 
         // GET: Team
-        public ActionResult Index()
+        public ActionResult Index(string Search)
         {
             string url = APIURL + "ListTeams";
             HttpResponseMessage response = api.Get(url);
@@ -24,8 +25,16 @@ namespace Csharp_Passion_Project.Controllers
 
             if (response.StatusCode == HttpStatusCode.OK)
                 teams = response.Content.ReadAsAsync<IEnumerable<TeamDto>>().Result.ToList();
-            
+
+            if (!String.IsNullOrEmpty(Search))
+                teams = teams.Where(x => 
+                    general.getLowerStringForSearch(x.Name).Contains(general.getLowerStringForSearch(Search)) ||
+                    general.getLowerStringForSearch(x.Owner).Contains(general.getLowerStringForSearch(Search)) ||
+                    general.getLowerStringForSearch(x.FormedOn.ToShortDateString()).Contains(general.getLowerStringForSearch(Search))
+                ).ToList();
+
             ViewData["title"] = "Team List";
+            ViewData["search"] = Search;
 
             return View(teams);
         }
@@ -54,15 +63,20 @@ namespace Csharp_Passion_Project.Controllers
 
         // POST: Team/Create
         [HttpPost]
-        public ActionResult Create(Team team)
+        public ActionResult Create(TeamDto teamDto)
         {
             try
             {
                 // TODO: Add insert logic here
+                Team team = new Team()
+                {
+                    Name = teamDto.Name,
+                    Id = teamDto.Id,
+                    FormedOn = DateTime.Now,
+                    Owner = teamDto.Owner
+                };
+
                 string url = APIURL + "AddTeam";
-
-                team.FormedOn = DateTime.Now;
-
                 HttpResponseMessage response = api.Post(url, team);
 
                 if (response.IsSuccessStatusCode)
@@ -97,11 +111,19 @@ namespace Csharp_Passion_Project.Controllers
 
         // POST: Team/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Team team)
+        public ActionResult Edit(int id, TeamDto teamDto)
         {
             try
             {
                 // TODO: Add update logic here
+                Team team = new Team()
+                {
+                    Name = teamDto.Name,
+                    Id = id,
+                    FormedOn = Convert.ToDateTime(teamDto.SFormedOn),
+                    Owner = teamDto.Owner
+                };
+
                 string url = APIURL + "UpdateTeam/" + id;
 
                 HttpResponseMessage response = api.Post(url, team);
