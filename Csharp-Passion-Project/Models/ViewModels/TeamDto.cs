@@ -17,6 +17,6 @@ namespace Csharp_Passion_Project.Models
 
         public string SFormedOn { get; set; }
 
-        //public List<PlayerDto> Players { get; set; }
+        public List<TeamPlayerDetailsWithPlayerDto> teamPlayers { get; set; }
     }
 }

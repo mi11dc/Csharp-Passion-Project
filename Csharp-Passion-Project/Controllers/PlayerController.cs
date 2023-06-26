@@ -40,7 +40,7 @@ namespace Csharp_Passion_Project.Controllers
         }
 
         // GET: Player/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int teamId = 0)
         {
             string url = APIURL + "FindPlayer/" + id;
             HttpResponseMessage response = api.Get(url);
@@ -50,6 +50,9 @@ namespace Csharp_Passion_Project.Controllers
                 selectedPlayer = response.Content.ReadAsAsync<PlayerDto>().Result;
 
             ViewData["title"] = "Player Details";
+
+            selectedPlayer.TeamId = teamId;
+
             return View(selectedPlayer);
         }
 

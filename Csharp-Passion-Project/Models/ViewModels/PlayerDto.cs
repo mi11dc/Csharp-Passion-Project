@@ -20,5 +20,7 @@ namespace Csharp_Passion_Project.Models
         public string Country { get; set; }
 
         public decimal BasePrice { get; set; }
+
+        public int TeamId { get; set; }
     }
 }

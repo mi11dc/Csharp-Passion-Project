@@ -1,6 +1,7 @@
 ﻿using Csharp_Passion_Project.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -43,6 +44,7 @@ namespace Csharp_Passion_Project.Controllers
         public ActionResult Details(int id)
         {
             string url = APIURL + "FindTeam/" + id;
+
             HttpResponseMessage response = api.Get(url);
             TeamDto selectedTeam = new TeamDto();
 

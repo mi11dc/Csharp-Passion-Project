@@ -15,6 +15,7 @@ namespace Csharp_Passion_Project.Controllers
     public class TeamDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private TeamPlayerDataController tpController = new TeamPlayerDataController();
 
         // GET: api/TeamData/ListTeams
         [HttpGet]
@@ -29,7 +30,8 @@ namespace Csharp_Passion_Project.Controllers
                 Name = t.Name,
                 Owner = t.Owner, 
                 FormedOn = (DateTime)t.FormedOn,
-                SFormedOn = t.FormedOn.ToString()
+                SFormedOn = t.FormedOn.ToString(),
+                teamPlayers = new List<TeamPlayerDetailsWithPlayerDto>()
             }));
 
             return teamDtos;
@@ -52,7 +54,8 @@ namespace Csharp_Passion_Project.Controllers
                 Name = team.Name,
                 Owner = team.Owner,
                 FormedOn = (DateTime)team.FormedOn,
-                SFormedOn = team.FormedOn.ToString()
+                SFormedOn = team.FormedOn.ToString(),
+                teamPlayers = tpController.ListTeamPlayersByTeamId(team.Id).ToList()
             };
 
             return Ok(teamDto);

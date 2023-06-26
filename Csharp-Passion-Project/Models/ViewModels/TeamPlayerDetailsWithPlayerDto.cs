@@ -5,12 +5,12 @@ using System.Web;
 
 namespace Csharp_Passion_Project.Models
 {
-    public class TeamPlayerDto
+    public class TeamPlayerDetailsWithPlayerDto
     {
         public int Id { get; set; }
 
         public int PlayerId { get; set; }
-        
+
         public string PlayerName { get; set; }
 
         public int TeamId { get; set; }
@@ -22,7 +22,17 @@ namespace Csharp_Passion_Project.Models
         public decimal JoinedPrice { get; set; }
 
         public DateTime ReleaseDate { get; set; }
+        
+        public DateTime DOB { get; set; }
 
-        public List<PlayerDto> Players { get; set; }
+        public string SDOB { get; set; }
+
+        public string Country { get; set; }
+
+        public decimal BasePrice { get; set; }
+
+        //public TeamPlayerDto teamPlayerDto { get; set; }
+
+        //public PlayerDto playerDto { get; set; }
     }
 }
